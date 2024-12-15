@@ -1,0 +1,94 @@
+body{
+  font-family: 'Roboto' sans-serif;
+  background-color: #f4f8fb;
+  background-image:
+    linear-gradient(45deg, turquoise 25%, transparent 25%),
+    linear-gradient(-45deg, turquoise 25%,transparent 25%),
+    linear-gradient(45deg, transparent 75%, lightgreen 75%),
+    linear-gradient(-45deg, transparent 75%, lightgreen 75%);
+;
+  background-size: 40px 40px;
+  color: #333;
+}
+
+
+.navbar{
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.navbar-brand{
+  font-weight: bold;
+  color: #007bff !important;
+}
+
+.navbar-nav .nav-link {
+  color: #555 !important;
+  transition: color 0.3s;
+}
+
+.container{
+  padding: 20px;
+  background-color: rgba(255,255,255,0.85);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.table{
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+.table thead{
+  background-color: #007bff;
+  color: white;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  vertical-align: middle;
+}
+
+button {
+  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover{
+  background-color: #0056b3 !important;
+  color: white;
+}
+
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  background-color: #007bff;
+  color:white;
+  border-bottom:  1px solid #0066cc;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.modal-title {
+  font-weight:bold;
+}
+
+.modal-body{
+  background-color: #f9f9f9;
+}
+
+.alert{
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 14px;
+}
