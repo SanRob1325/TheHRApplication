@@ -9,7 +9,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # return unless Rails.env.test?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -33,6 +34,15 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.before(:each, type: :system) do
+
+    Capybara.app_host = 'http://localhost:3001'
+    Capybara.server_host = "localhost"
+    Capybara.server_port = 3001
+
+    driven_by :selenium_chrome_headless
+    driven_by :rack_test
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -45,7 +55,18 @@ RSpec.configure do |config|
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
+  require 'capybara/rails'
 
+
+  Capybara::Screenshot.autosave_on_failure = true
+
+  Capybara.register_driver :selenium_chrome do |app|
+    Capybara::Selenium::Driver.new(app,
+                                   browser: :chrome,
+                                   options: Selenium::WebDriver::Chrome::Options.new(binary: '/path/to/google-chrome')
+                                   )
+  end
+  Capybara.javascript_driver = :selenium_chrome
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
   #

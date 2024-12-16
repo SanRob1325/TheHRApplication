@@ -90,7 +90,7 @@ function Employees(){
         <div className="container mt-5 employees-container">
             <h2 className="mb-4">Employee Management</h2>
             {error && <Alert variant="danger">{error}</Alert>}
-            <Button variant="primary" onClick={handleAddEmployee} className="mb-3">
+            <Button id ="add-employee" variant="primary" onClick={handleAddEmployee} className="mb-3">
                 Add Employee
             </Button>
             {loading ? (

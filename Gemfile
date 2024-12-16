@@ -46,5 +46,20 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
+group :test do
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+  gem 'capybara'
+end
+
+group :test do
+  gem 'webmock'
+end
+
 gem 'rack-cors'
 gem "rspec-rails", "~> 7.1"
+
+gem "devise", "~> 4.9"
+
+gem "devise-jwt", "~> 0.12.1"
+gem 'capybara-screenshot', group: :test

@@ -28,5 +28,9 @@ RSpec.describe Employee,type: :model do
     expect(employee.department).to eq(department)
   end
 
+  it "is not valid with and incorrect email format" do
+    employee = Employee.new(name: "Jack Jones",email: "invalid-email")
+    expect(employee).not_to be_valid
+  end
 
 end

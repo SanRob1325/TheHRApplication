@@ -3,7 +3,10 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Employees from "./Employees";
 import Department from "./Department";
 import Attendance from "./Attendance";
+import PerformanceReviews from "./PerformanceReviews";
+import LeaveRequests from "./LeaveRequests";
 import './App.css'
+
 function App(){
   return(
       <Router>
@@ -41,16 +44,28 @@ function App(){
                                       Attendance
                                   </Link>
                               </li>
+                              <li className="nav-item">
+                                  <Link className="nav-link" to="/performance_reviews">
+                                      Performance Reviews
+                                  </Link>
+                              </li>
+                              <li className="nav-item">
+                                  <Link className="nav-link" to="/leave_requests">
+                                      Leave Requests
+                                  </Link>
+                              </li>
                           </ul>
                       </div>
                   </div>
               </nav>
               <div className="container">
                   <Routes>
-                      <Route path="/" element={<h1>Welcome to Snap HR Management System</h1>} />
+                      <Route path="/" element={<h1>Welcome to Snap HR Management System</h1>}/>
                       <Route path="/employees" element={<Employees />} />
                       <Route path="/departments" element={<Department/>} />
                       <Route path="/attendance" element={<Attendance/>} />
+                      <Route path="/performance_reviews" element={<PerformanceReviews />} />
+                      <Route path="/leave_requests" element={<LeaveRequests />} />
                   </Routes>
               </div>
           </div>
