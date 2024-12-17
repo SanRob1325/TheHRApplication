@@ -1,7 +1,7 @@
 class LeaveRequest < ApplicationRecord
   belongs_to :employee
 
-  validates :leave_type , presence: true, inclusion: { in: %w(Casual Sick Unpaid Leave) }
+  validates :leave_type, presence: true, inclusion: { in: %w[Casual Sick Unpaid Leave] }
   validates :leave_type, :start_date, :end_date, :status, presence: true
   validate :end_date_after_start_date
 

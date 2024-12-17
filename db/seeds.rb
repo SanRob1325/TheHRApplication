@@ -6,4 +6,3 @@ Employee.create(name: "Bob", email: "bob@bob.com", department: eng)
 
 Attendance.create(employee_id: 1, date: Date.today, status: "Present")
 Attendance.create(employee_id: 2, date: Date.today, status: "Absent")
-

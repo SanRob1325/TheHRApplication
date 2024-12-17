@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Department,type: :model do
+RSpec.describe Department, type: :model do
   it "is valid with a name" do
     department = Department.new(name: "Engineering")
     expect(department).to be_valid
@@ -12,7 +12,7 @@ RSpec.describe Department,type: :model do
   end
 
   it 'is valid without a description' do
-    department = Department.new(name: "Engineering" ,description: nil)
+    department = Department.new(name: "Engineering", description: nil)
     expect(department).to be_valid
   end
 end
@@ -26,5 +26,4 @@ describe 'Associations' do
     department.reload
     expect(department.employees).to include(employee1, employee2)
   end
-
 end

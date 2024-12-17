@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Employee,type: :model do
+RSpec.describe Employee, type: :model do
   describe 'Validations' do
     it 'is valid with valid attributes' do
       department = Department.create(name: "HR", description: "Handles HR tasks")
@@ -8,7 +8,7 @@ RSpec.describe Employee,type: :model do
   end
   it "is valid with a name,email , and department" do
     department = Department.create(name: "Engineering")
-    employee = Employee.new(name: "Jack Jones", email:"jackjones@example.com",department: department)
+    employee = Employee.new(name: "Jack Jones", email: "jackjones@example.com", department: department)
     expect(employee).to be_valid
   end
 
@@ -24,13 +24,12 @@ RSpec.describe Employee,type: :model do
 
   it "belongs to a department" do
     department = Department.create(name: "Marketing")
-    employee = Employee.create(name: "Jack Jones", email: "jackjones@example.com",department: department)
+    employee = Employee.create(name: "Jack Jones", email: "jackjones@example.com", department: department)
     expect(employee.department).to eq(department)
   end
 
   it "is not valid with and incorrect email format" do
-    employee = Employee.new(name: "Jack Jones",email: "invalid-email")
+    employee = Employee.new(name: "Jack Jones", email: "invalid-email")
     expect(employee).not_to be_valid
   end
-
 end

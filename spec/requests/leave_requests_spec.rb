@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "LeaveRequests", type: :request do
   let!(:department) { Department.create(name: "HR") }
-  let!(:employee) {Employee.create(name: "Alice", email: "alice@example.com", department: department)}
+  let!(:employee) { Employee.create(name: "Alice", email: "alice@example.com", department: department) }
   let!(:leave_requests) { create_list(:leave_request, 3, employee: employee) }
 
   let(:valid_attributes) do
@@ -92,6 +92,3 @@ RSpec.describe "LeaveRequests", type: :request do
     end
   end
 end
-
-
-

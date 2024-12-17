@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :notifications, only: [:index, :create,:destroy]
+  resources :notifications, only: [ :index, :create, :destroy ]
   resources :attendances
   resources :departments
   resources :employees
   resources :leave_requests
-  resources :performance_reviews, only: [:index, :create,:update, :destroy]
+  resources :performance_reviews, only: [ :index, :create, :update, :destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :leave_requests do
     member do

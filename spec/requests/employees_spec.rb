@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Employees API',type: :request do
-  let!(:department) {Department.create(name: "HR", description: "Handles HR management")}
-  let!(:employee) {Employee.create(name: "Jack Jones", email: "jackjones@example.com",department: department)}
+RSpec.describe 'Employees API', type: :request do
+  let!(:department) { Department.create(name: "HR", description: "Handles HR management") }
+  let!(:employee) { Employee.create(name: "Jack Jones", email: "jackjones@example.com", department: department) }
 
   describe "GET /employees" do
     it "returns a list of all employees and their associated departments" do
@@ -35,11 +35,11 @@ RSpec.describe 'Employees API',type: :request do
 
   describe "POST /employees" do
     let(:valid_attributes) do
-      {employee: {name: "Jack Jones", email: "jackjones@example.com",department_id: department.id}}
+      { employee: { name: "Jack Jones", email: "jackjones@example.com", department_id: department.id } }
     end
 
     let(:invalid_attributes) do
-      {employee: {name: "", email: "invalid-email",department_id: nil}}
+      { employee: { name: "", email: "invalid-email", department_id: nil } }
     end
 
     it "creates a new employee with valid attributes" do
@@ -58,7 +58,7 @@ RSpec.describe 'Employees API',type: :request do
 
       expect(response).to have_http_status(:unprocessable_entity)
       json_response = JSON.parse(response.body)
-      expect(json_response).to include("name","email","department_id")
+      expect(json_response).to include("name", "email", "department_id")
       expect(json_response["name"]).to include("can't be blank")
       expect(json_response["email"]).to include("is invalid")
       expect(json_response["department_id"]).to include("can't be blank")
@@ -66,7 +66,7 @@ RSpec.describe 'Employees API',type: :request do
   end
 
   describe "PATCH/PUT /employees/:id" do
-    let(:valid_update) {{ employee: { name: "Updated Name"}} }
+    let(:valid_update) { { employee: { name: "Updated Name" } } }
 
     it "updates the requested existing employee" do
       put "/employees/#{employee.id}", params: valid_update
@@ -77,7 +77,7 @@ RSpec.describe 'Employees API',type: :request do
     end
 
     it "returns and error in an invalid update" do
-      invalid_update = {employee: {name: ""}}
+      invalid_update = { employee: { name: "" } }
       put "/employees/#{employee.id}", params: invalid_update
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -100,9 +100,4 @@ RSpec.describe 'Employees API',type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
-
-
-
-
-
 end

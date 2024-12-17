@@ -1,5 +1,5 @@
 class LeaveRequestsController < ApplicationController
-  before_action :set_leave_request, only: %i[update  destroy]
+  before_action :set_leave_request, only: %i[update destroy]
 
   rescue_from ActiveRecord::RecordNotFound do
     render json: { error: "LeaveRequest not found" }, status: :not_found
@@ -7,7 +7,7 @@ class LeaveRequestsController < ApplicationController
 
   def index
     @leave_requests = LeaveRequest.includes(:employee).all
-    render json: @leave_requests.to_json(include: {employee: { only: [:id, :name] }})
+    render json: @leave_requests.to_json(include: { employee: { only: [ :id, :name ] } })
   end
 
   def create

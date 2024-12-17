@@ -5,7 +5,7 @@ RSpec.describe 'Attendance Requests API', type: :request do
   let!(:employee) { create(:employee, department: department) }
 
   let!(:attendances) do
-    (1..3).map { |n| create(:attendance, employee: employee,date: Date.today - n.days ) }
+    (1..3).map { |n| create(:attendance, employee: employee, date: Date.today - n.days) }
   end
   let!(:attendance_id) { attendances.first.id }
 
@@ -28,7 +28,7 @@ RSpec.describe 'Attendance Requests API', type: :request do
   end
 
   describe 'POST /attendances' do
-    let(:valid_attributes) {{attendance: {employee_id: employee.id,date: Date.today, status: "Present"}}}
+    let(:valid_attributes) { { attendance: { employee_id: employee.id, date: Date.today, status: "Present" } } }
 
     context 'when the request is valid' do
       it 'creates a attendance' do
@@ -43,7 +43,7 @@ RSpec.describe 'Attendance Requests API', type: :request do
 
     context 'when the request is invalid' do
       it 'does not create a attendance' do
-        post "/attendances", params: {attendance: {employee_id: nil,date: nil, status: nil}}
+        post "/attendances", params: { attendance: { employee_id: nil, date: nil, status: nil } }
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(JSON.parse(response.body)["errors"]).to include("Employee must exist", "Date can't be blank", "Status is not included in the list")
@@ -52,7 +52,7 @@ RSpec.describe 'Attendance Requests API', type: :request do
   end
 
   describe 'PUT /attendances/:id' do
-    let(:valid_attributes) {{attendance: {status: "Absent"}}}
+    let(:valid_attributes) { { attendance: { status: "Absent" } } }
 
     context 'when the record exists' do
       it 'updates the attendance record' do
@@ -65,7 +65,7 @@ RSpec.describe 'Attendance Requests API', type: :request do
 
     context 'when the record does not exist' do
       it "returns a not found error" do
-        put "/attendances/999999", params: { attendance: {status: "Absent" } }
+        put "/attendances/999999", params: { attendance: { status: "Absent" } }
 
         expect(response).to have_http_status(:not_found)
         expect(JSON.parse(response.body)["error"]).to eq("Attendance not found")

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Attendance,type: :model do
-  let(:department) {Department.create(name:"Marketing")}
-  let(:employee) {Employee.create(name: "Jack Jones", email: "jackjones@example.com", department: department)}
+RSpec.describe Attendance, type: :model do
+  let(:department) { Department.create(name: "Marketing") }
+  let(:employee) { Employee.create(name: "Jack Jones", email: "jackjones@example.com", department: department) }
 
   describe "Valitdations" do
     it "is valid with an employee,date and status" do
-      attendance = Attendance.new(employee: employee, date: Date.today,status: "Present")
+      attendance = Attendance.new(employee: employee, date: Date.today, status: "Present")
       expect(attendance).to be_valid
     end
     it "is invalid without a date" do
@@ -25,13 +25,13 @@ RSpec.describe Attendance,type: :model do
     end
 
     it "is invalid with an incorrect status" do
-      attendance = Attendance.new(employee: employee,date: Date.today, status: "Unknown")
+      attendance = Attendance.new(employee: employee, date: Date.today, status: "Unknown")
       expect(attendance).not_to be_valid
       expect(attendance.errors[:status]).to include("is not included in the list")
     end
 
     it "is invalid with a future date" do
-      attendance = Attendance.new(employee: employee, date: Date.tomorrow,status: "Present" )
+      attendance = Attendance.new(employee: employee, date: Date.tomorrow, status: "Present")
       expect(attendance).not_to be_valid
       expect(attendance.errors[:date]).to include("can't be in the future")
     end
@@ -51,5 +51,3 @@ RSpec.describe Attendance,type: :model do
     end
   end
 end
-
-

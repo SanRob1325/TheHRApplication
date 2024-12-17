@@ -16,13 +16,13 @@ RSpec.describe "Notifications API", type: :request do
 
   describe "POST /notifications" do
     it "creates a new notification" do
-      post "/notifications", params: {message: "Test Notification" }
+      post "/notifications", params: { message: "Test Notification" }
       expect(response).to have_http_status(:created)
       expect(NotificationManager.instance.get_notifications.size).to eq(1)
     end
 
     it "returns an error if message is blank" do
-      post "/notifications", params: {message: "" }
+      post "/notifications", params: { message: "" }
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end

@@ -47,27 +47,27 @@ group :development, :test do
 end
 
 group :test do
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
-  gem 'capybara'
+  gem "selenium-webdriver"
+  gem "webdrivers"
+  gem "capybara"
 end
 
 group :test do
-  gem 'webmock'
+  gem "webmock"
 end
 
 group :test do
-  gem 'database_cleaner-active_record'
+  gem "database_cleaner-active_record"
 end
 
 group :development, :test do
-  gem 'faker'
-  gem 'factory_bot_rails'
+  gem "faker"
+  gem "factory_bot_rails"
 end
-gem 'rack-cors'
+gem "rack-cors"
 gem "rspec-rails", "~> 7.1"
 
 gem "devise", "~> 4.9"
 
 gem "devise-jwt", "~> 0.12.1"
-gem 'capybara-screenshot', group: :test
+gem "capybara-screenshot", group: :test

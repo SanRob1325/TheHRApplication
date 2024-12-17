@@ -7,10 +7,10 @@ class NotificationsController < ApplicationController
   def create
     message = params[:message]
     if message.blank?
-      render json: {error: "Message can't be blank"},status: :unprocessable_entity
+      render json: { error: "Message can't be blank" }, status: :unprocessable_entity
     else
       NotificationManager.instance.add_notification(message)
-      render json: {message: "Message cannot be blank"},status: :created
+      render json: { message: "Message cannot be blank" }, status: :created
     end
   end
   def destroy
@@ -20,6 +20,6 @@ class NotificationsController < ApplicationController
       NotificationManager.instance.remove_notification(notification[:id])
       head :no_content
     end
-    render json: { message: "Notification not found"},status: :no_content
+    render json: { message: "Notification not found" }, status: :no_content
   end
 end

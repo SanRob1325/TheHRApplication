@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Departments API', type: :request do
-  let!(:departments) {create_list(:department, 3)}
-  let(:department_id) {departments.first.id}
-  let(:valid_attributes) {{name: "Finance",description: "Finance"}}
+  let!(:departments) { create_list(:department, 3) }
+  let(:department_id) { departments.first.id }
+  let(:valid_attributes) { { name: "Finance", description: "Finance" } }
 
 
 
@@ -31,12 +31,12 @@ RSpec.describe 'Departments API', type: :request do
     end
 
     describe "POST /departments" do
-      let(:valid_attributes) {{name: "Finance",description: "Finance"}}
+      let(:valid_attributes) { { name: "Finance", description: "Finance" } }
 
       context "when the request is valid" do
         it "creates a new department" do
           expect {
-            post "/departments", params:{ department: valid_attributes}
+            post "/departments", params: { department: valid_attributes }
           }.to change(Department, :count).by(1)
 
           expect(response).to have_http_status(:created)
@@ -47,7 +47,7 @@ RSpec.describe 'Departments API', type: :request do
       context "when the request is invalid" do
         it "does not create a new department without a name" do
           expect {
-            post "/departments", params:{ department: { description: "No name provided" }}
+            post "/departments", params: { department: { description: "No name provided" } }
           }.to_not change(Department, :count)
 
           expect(response).to have_http_status(:unprocessable_entity)
@@ -57,11 +57,11 @@ RSpec.describe 'Departments API', type: :request do
     end
 
     describe "PUT /departments/:id" do
-      let(:valid_attributes) {{name:  "Updated Name"}}
+      let(:valid_attributes) { { name:  "Updated Name" } }
 
       context "when the department exists" do
         it "updates the department" do
-          put "/departments/#{department_id}", params:{ department: valid_attributes}
+          put "/departments/#{department_id}", params: { department: valid_attributes }
 
           updated_department = Department.find(department_id)
           expect(response).to have_http_status(:ok)
@@ -71,7 +71,7 @@ RSpec.describe 'Departments API', type: :request do
 
       context "when the department doesn't exist" do
         it "returns status code 404 when department doesn't exist" do
-          put "/departments/99999", params:{ department: valid_attributes}
+          put "/departments/99999", params: { department: valid_attributes }
 
           expect(response).to have_http_status(:not_found)
         end
@@ -103,8 +103,4 @@ RSpec.describe 'Departments API', type: :request do
       JSON.parse(response.body)
     end
   end
-
-
-
-
 end

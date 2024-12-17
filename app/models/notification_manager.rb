@@ -7,7 +7,7 @@ class NotificationManager
   end
 
   def add_notification(message)
-    @notifications << {id: @next_id, message: message}
+    @notifications << { id: @next_id, message: message }
     @next_id += 1
   end
 
@@ -20,6 +20,6 @@ class NotificationManager
   end
 
   def remove_notifications
-    @notifications.reject! { |notification| notification[:id] == id}
+    @notifications.reject! { |notification| notification[:id] == id }
   end
 end

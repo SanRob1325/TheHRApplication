@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "PerformanceReviews", type: :request do
   let!(:department) { Department.create(name: "HR") }
-  let!(:employee) {Employee.create(name: "Alice", email: "alice@example.com", department: department)}
+  let!(:employee) { Employee.create(name: "Alice", email: "alice@example.com", department: department) }
   let!(:performance_reviews) { create_list(:performance_review, 3, employee: employee) }
 
   let(:valid_attributes) do
@@ -109,5 +109,4 @@ RSpec.describe "PerformanceReviews", type: :request do
       end
     end
   end
-
 end

@@ -1,12 +1,12 @@
 class PerformanceReviewsController < ApplicationController
-  before_action :set_performance_review, only: [:update, :destroy]
+  before_action :set_performance_review, only: [ :update, :destroy ]
 
   rescue_from ActiveRecord::RecordNotFound do
-    render json: { error: 'Performance review not found' }, status: :not_found
+    render json: { error: "Performance review not found" }, status: :not_found
   end
   def index
     @performance_reviews = PerformanceReview.includes(:employee).all
-    render json: @performance_reviews.to_json(include: {employee: {only: [:id, :name]}})
+    render json: @performance_reviews.to_json(include: { employee: { only: [ :id, :name ] } })
   end
 
   def create
@@ -38,6 +38,6 @@ class PerformanceReviewsController < ApplicationController
   end
 
   def performance_review_params
-    params.require(:performance_review).permit(:employee_id,:reviewer, :rating, :feedback)
+    params.require(:performance_review).permit(:employee_id, :reviewer, :rating, :feedback)
   end
 end
