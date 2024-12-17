@@ -56,6 +56,10 @@ group :test do
   gem 'webmock'
 end
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
