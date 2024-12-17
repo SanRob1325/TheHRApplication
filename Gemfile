@@ -56,6 +56,10 @@ group :test do
   gem 'webmock'
 end
 
+group :development, :test do
+  gem 'faker'
+  gem 'factory_bot_rails'
+end
 gem 'rack-cors'
 gem "rspec-rails", "~> 7.1"
 

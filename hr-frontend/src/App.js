@@ -5,6 +5,7 @@ import Department from "./Department";
 import Attendance from "./Attendance";
 import PerformanceReviews from "./PerformanceReviews";
 import LeaveRequests from "./LeaveRequests";
+import NotificationManager from "./NotificationManager";
 import './App.css'
 
 function App(){
@@ -54,6 +55,11 @@ function App(){
                                       Leave Requests
                                   </Link>
                               </li>
+                              <li className="nav-item">
+                                  <Link className="nav-link" to="/notifications">
+                                      Notifications
+                                  </Link>
+                              </li>
                           </ul>
                       </div>
                   </div>
@@ -66,6 +72,7 @@ function App(){
                       <Route path="/attendance" element={<Attendance/>} />
                       <Route path="/performance_reviews" element={<PerformanceReviews />} />
                       <Route path="/leave_requests" element={<LeaveRequests />} />
+                      <Route path="/notifications" element={<NotificationManager />} />
                   </Routes>
               </div>
           </div>

@@ -18,9 +18,9 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new(attendance_params)
 
     if @attendance.save
-      render json: @attendance.to_json(include: {employee: {only: [:id, :name]}}), status: :created, location: @attendance
+      render json: @attendance, status: :created
     else
-      render json: @attendance.errors, status: :unprocessable_entity
+      render json: {errors: @attendance.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -42,6 +42,8 @@ class AttendancesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
       @attendance = Attendance.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: {error: "Attendance not found"}, status: :not_found
     end
 
     # Only allow a list of trusted parameters through.

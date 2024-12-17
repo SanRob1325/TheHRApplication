@@ -1,0 +1,10 @@
+{
+  "attendances": [
+    {"id": 1, "employee": {"id": 1, "name": "Jack Jones"}, "date": "2024-06-17","status": "Present"},
+    {"id": 1, "employee": {"id": 2, "name": "Jane Smith"}, "date": "2024-06-16","status": "Absent"}
+  ],
+  "employees": [
+    {"id":1, "name": "Jack Jones"},
+    {"id": 2, "name":  "Jane Smith"}
+  ]
+}

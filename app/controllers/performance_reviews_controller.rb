@@ -1,11 +1,13 @@
 class PerformanceReviewsController < ApplicationController
   before_action :set_performance_review, only: [:update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    render json: { error: 'Performance review not found' }, status: :not_found
+  end
   def index
     @performance_reviews = PerformanceReview.includes(:employee).all
     render json: @performance_reviews.to_json(include: {employee: {only: [:id, :name]}})
   end
-
 
   def create
     @performance_review = PerformanceReview.new(performance_review_params)

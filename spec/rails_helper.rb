@@ -34,6 +34,7 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
   config.before(:each, type: :system) do
 
     Capybara.app_host = 'http://localhost:3001'
