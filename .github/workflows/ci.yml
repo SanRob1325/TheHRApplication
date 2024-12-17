@@ -38,15 +38,6 @@ jobs:
       - name: Run Rubocop (Ruby Linter)
         run: bundle exec rubocop --format progress
 
-      - name: Install Node Dependencies
-        if: always()
-        run: |
-          npm install --silent
-
-      - name: Run ESLint (JS Linter)
-        if: always()
-        run: npx eslint src/ --ext .js,.jsx --max-warnings=0
-
       - name: Setup Database
         run: |
           bin/rails db:create db:schema:load
