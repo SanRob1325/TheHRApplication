@@ -67,8 +67,6 @@ jobs:
           cd ~/hr_system
           git pull origin main
           bundle install
-          cd ~/hr_system
-          bundle install
           RAILS_ENV=production bin/rails db:setup
           RAILS_ENC=production bin/rails s -d
           EOF
