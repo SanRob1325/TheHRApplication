@@ -15,7 +15,7 @@ function Attendances(){
         fetchAttendances();
         fetchEmployees();
     }, []);
-
+    //API calls to the backend
     const fetchAttendances = async () => {
         try{
             setLoading(true);
@@ -85,7 +85,8 @@ function Attendances(){
         setShowModal(false);
         setError("");
     };
-
+    //uses DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
+    //Inspiration and Reference:https://www.npmjs.com/package/react-spinners
     return (
         <div className="container mt-5 attendances-container">
             <h2 className="mb-4">Attendance Management</h2>

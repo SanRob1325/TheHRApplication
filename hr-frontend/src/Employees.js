@@ -15,7 +15,7 @@ function Employees(){
         fetchEmployees();
         fetchDepartments();
     }, []);
-
+    //API Calls to the Backend
     const fetchEmployees = async  () =>{
         try {
             setLoading(true);
@@ -85,7 +85,7 @@ function Employees(){
         setShowModal(false);
         setError("");
     };
-
+    //uses DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
     return (
         <div className="container mt-5 employees-container">
             <h2 className="mb-4">Employee Management</h2>

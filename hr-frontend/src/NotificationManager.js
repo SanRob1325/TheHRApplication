@@ -5,7 +5,7 @@ const NotificationManager = () => {
     const [notifications, setNotifications] = useState([]);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
-
+    //API endpoint requests that will execute functionality once interaction
     const fetchNotifications = async () => {
         try {
             const response = await API.get("/notifications");
@@ -46,7 +46,7 @@ const NotificationManager = () => {
     useEffect(() => {
         fetchNotifications();
     }, []);
-
+    //uses DOM manipulation to call the functions to execute the REACT methods
     return (
         <div className="notification-manager">
             <h1 className="title">Notification Manager</h1>

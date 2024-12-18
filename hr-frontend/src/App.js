@@ -10,6 +10,9 @@ import './App.css'
 import logo from './assets/human-resource-logo.jpg'
 import image from './images/HRdesign.jpg'
 function App(){
+    //Reference: https://api.reactrouter.com/v7/functions/react_router.Link.html
+    //Inspiration and Reference:https://www.npmjs.com/package/react-router-dom
+    //Inspiration and Reference:https://create-react-app.dev/docs/adding-images-fonts-and-files/
   return(
       <Router>
           <div>

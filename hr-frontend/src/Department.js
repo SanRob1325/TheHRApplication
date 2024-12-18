@@ -13,7 +13,7 @@ function Department(){
     useEffect(() => {
         fetchDepartments();
     }, []);
-
+    //API Calls to the backend
     const fetchDepartments = async () => {
         try{
             setLoading(true);
@@ -73,7 +73,7 @@ function Department(){
         setShowModal(false);
         setError("");
     };
-
+    //uses DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
     return (
         <div className="container mt-5 departments-container">
             <h2 className="mb-4">Department Management</h2>

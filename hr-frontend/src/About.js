@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css"
-
+//Added bootstrap styling
 function About(){
     return(
         <div className="container mt-5 about-container">

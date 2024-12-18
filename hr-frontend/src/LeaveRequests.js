@@ -28,7 +28,7 @@ function LeaveRequests(){
             setLoading(false);
         }
     };
-
+    //API Calls to the backend
     const fetchEmployees = async () => {
         try{
             const response = await API.get("/employees");
@@ -91,7 +91,9 @@ function LeaveRequests(){
         setShowModal(false);
         setError("");
     };
-
+    // Inspiration and Reference:https://www.npmjs.com/package/react-modal
+    // Inspiration and Reference: https://www.npmjs.com/package/react-alert
+    // Inspiration and Reference:https://react.dev/reference/react-dom/components/form
     return (
         <div className="container mt-5 leave-requests-container">
             <h2 className="mb-4">Leave Requests Management</h2>
