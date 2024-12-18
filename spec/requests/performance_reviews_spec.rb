@@ -1,5 +1,5 @@
 require 'rails_helper'
-#Test suite
+# Test suite
 RSpec.describe "PerformanceReviews", type: :request do
   let!(:department) { Department.create(name: "HR") }
   let!(:employee) { Employee.create(name: "Alice", email: "alice@example.com", department: department) }

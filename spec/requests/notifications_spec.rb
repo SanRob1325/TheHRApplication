@@ -1,5 +1,5 @@
 require 'rails_helper'
-#Test library
+# Test library
 RSpec.describe "Notifications API", type: :request do
   let(:notification_manager) { NotificationManager.instance }
   before(:each) do

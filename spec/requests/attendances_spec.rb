@@ -1,14 +1,14 @@
 require 'rails_helper'
-#Test library
+# Test library
 RSpec.describe 'Attendance Requests API', type: :request do
-#Creates a department and employee for attendances that are being tested
+  # Creates a department and employee for attendances that are being tested
   let!(:department) { create(:department) }
   let!(:employee) { create(:employee, department: department) }
-# Creates multiple attendance records for the employee
+  # Creates multiple attendance records for the employee
   let!(:attendances) do
     (1..3).map { |n| create(:attendance, employee: employee, date: Date.today - n.days) }
   end
-# Fetches the ID for multiple attendance records for the employee
+  # Fetches the ID for multiple attendance records for the employee
   let!(:attendance_id) { attendances.first.id }
 
   describe 'GET /attendances' do
