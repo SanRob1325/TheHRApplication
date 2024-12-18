@@ -47,5 +47,39 @@ jobs:
           bin/rails db:setup
           bundle exec rspec --exclude-pattern "spec/system/**/*_spec.rb"
       
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          set -e
+          # Navigates t project directory clone if it's missing
+          if [! -d ~/hr_system ]; then
+            git clone git@github.com:SanRob1325/TheHRApplication.git ~/hr_system
+          else
+            cd ~/hr_system
+            git pull
+          fi
+          # Set up Rails environment
+          cd ~/hr_system
+          bundle install
+          RAILS_ENV=production bin/rails db:setup
+          RAILS_ENC=production bin/rails assests:precompile
+          # Starts or restarts Rails server
+          pkill -f 'rails server' || true
+          nohup RAILS_ENV=production bin/rails server -b 0.0.0.0 -p 3000 -d
+          EOF
       
 
