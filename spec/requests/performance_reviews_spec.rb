@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+#Test suite
 RSpec.describe "PerformanceReviews", type: :request do
   let!(:department) { Department.create(name: "HR") }
   let!(:employee) { Employee.create(name: "Alice", email: "alice@example.com", department: department) }
@@ -26,7 +26,7 @@ RSpec.describe "PerformanceReviews", type: :request do
       }
     }
   end
-
+  # Helps parse JSON responses Reference:https://ruby-doc.org/stdlib-3.0.1/libdoc/json/rdoc/JSON.html
   def json
     JSON.parse(response.body) rescue {}
   end

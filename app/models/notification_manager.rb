@@ -1,4 +1,7 @@
 require "singleton"
+
+# Inspiration for singleton design pattern implementation, Reference:https://refactoring.guru/design-patterns/singleton/ruby/example
+# Another reference: https://dev.to/samuelfaure/explaining-ruby-s-singleton-class-eigenclass-to-confused-beginners-cep
 class NotificationManager
   include Singleton
 

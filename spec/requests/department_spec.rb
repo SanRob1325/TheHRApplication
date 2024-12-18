@@ -1,6 +1,7 @@
 require 'rails_helper'
-
+#Test library
 RSpec.describe 'Departments API', type: :request do
+  # creates a list of departments and valid attibutes associated with specific departments
   let!(:departments) { create_list(:department, 3) }
   let(:department_id) { departments.first.id }
   let(:valid_attributes) { { name: "Finance", description: "Finance" } }

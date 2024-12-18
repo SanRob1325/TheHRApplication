@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+#Test library
 RSpec.describe 'Employees API', type: :request do
   let!(:department) { Department.create(name: "HR", description: "Handles HR management") }
   let!(:employee) { Employee.create(name: "Jack Jones", email: "jackjones@example.com", department: department) }

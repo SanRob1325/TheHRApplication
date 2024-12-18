@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# Test library
 RSpec.describe Department, type: :model do
   it "is valid with a name" do
     department = Department.new(name: "Engineering")

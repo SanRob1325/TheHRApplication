@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# Test library
 RSpec.describe LeaveRequest, type: :model do
   let(:department) { Department.create(name: "Marketing") }
   let(:employee) { Employee.create(name: "Jack Jones", email: "jackjones@gmail.com", department: department) }
