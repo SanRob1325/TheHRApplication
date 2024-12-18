@@ -63,23 +63,15 @@ jobs:
 
       - name: Deploy EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-          set -e
-          # Navigates t project directory clone if it's missing
-          if [! -d ~/hr_system ]; then
-            git clone git@github.com:SanRob1325/TheHRApplication.git ~/hr_system
-          else
-            cd ~/hr_system
-            git pull
-          fi
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          cd ~/hr_system
+          git pull origin main
+          bundle install
           # Set up Rails environment
           cd ~/hr_system
           bundle install
           RAILS_ENV=production bin/rails db:setup
-          RAILS_ENC=production bin/rails assests:precompile
-          # Starts or restarts Rails server
-          pkill -f 'rails server' || true
-          nohup RAILS_ENV=production bin/rails server -b 0.0.0.0 -p 3000 -d
+          RAILS_ENC=production bin/rails s -d
           EOF
       
 
