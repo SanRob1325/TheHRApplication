@@ -1,10 +1,9 @@
 import React, {useState, useEffect, use} from "react";
-import axios from "axios";
 import API from "./api";
 
 const NotificationManager = () => {
     const [notifications, setNotifications] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
+    const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
     const fetchNotifications = async () => {
@@ -17,14 +16,11 @@ const NotificationManager = () => {
         }
     };
 
-    const addNotification = async (message) => {
-        console.log("Sending notification:", message);
-        try {
-            const response = await API.post('/notifications',{message})
-            console.log('Notification added:',response.data)
-        } catch (error) {
-            console.error("Error adding notifications", error.response?.data || error.message);
-        }
+    const addNotification = async () => {
+        if(message.trim() === "") return alert("Please fill in the message")
+        const response = await API.post("/notifications", {message})
+        setMessage("")
+        fetchNotifications();
     };
 
     const deleteNotification = async (id) => {
@@ -52,39 +48,33 @@ const NotificationManager = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Notification Manager</h1>
+        <div className="notification-manager">
+            <h1 className="title">Notification Manager</h1>
 
-            {error && <p style={{color: "red"}}>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <div>
                 <input
                     type="text"
-                    placeholder="Enter notification message"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Enter a message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="input-box"
                 />
-                <button onClick={() =>addNotification("New notification")}>Add Notification</button>
+                <button onClick={ addNotification} className="btn add-btn">Add Notification</button>
+                <button onClick={ clearNotifications} className="btn clear-btn">Clear All</button>
             </div>
-            <h2>Notifications</h2>
-            {notifications.length === 0 ? (
-                <p>No notifications available.</p>
-            ) : (
-                <ul>
-                    {notifications.map((notification) => (
-                        <li key={notification.id}>
-                            {notification.message}{""}
-                            <button onClick={() => deleteNotification(notification.id)}>
-                                Delete
-                            </button>
-                        </li>
-
-                    ))}
-                </ul>
-            )}
-            <button onClick={clearNotifications} style={{marginTop: "10px"}}>
-                Clear All Notifications
-            </button>
+            <ul className="notification-list">
+                {notifications.map((notification) => (
+                    <li key={notification.id} className="notification-item">
+                        {notification.message}
+                        <button onClick={() => deleteNotification(notification.id)} className="btn delete-btn">
+                            Delete
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </div>
+
     );
 };
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :notifications, only: [ :index, :create, :destroy ]
+  delete "/notifications", to: "notifications#destroy_all"
   resources :attendances
   resources :departments
   resources :employees

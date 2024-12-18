@@ -107,6 +107,10 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    database_cleaner-active_record (2.2.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.4.1)
     debug (1.9.2)
       irb (~> 1.10)
@@ -221,6 +225,7 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     psych (5.2.1)
       date
       stringio
@@ -421,12 +426,14 @@ DEPENDENCIES
   brakeman
   capybara
   capybara-screenshot
+  database_cleaner-active_record
   debug
   devise (~> 4.9)
   devise-jwt (~> 0.12.1)
   factory_bot_rails
   faker
   kamal
+  pg
   puma (>= 5.0)
   rack-cors
   rails (~> 8.0.1)

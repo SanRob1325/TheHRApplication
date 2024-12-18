@@ -1,51 +1,60 @@
 require 'rails_helper'
 
 RSpec.describe "Notifications API", type: :request do
+  let(:notification_manager) { NotificationManager.instance }
   before(:each) do
     NotificationManager.instance.clear_notifications
   end
 
   describe "GET /notifications" do
     it "returns a list of notifications" do
-      NotificationManager.instance.add_notification("Test Notification")
+      notification_manager.add_notification("Test Notification")
       get "/notifications"
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).size).to eq(1)
+      json_response = JSON.parse(response.body)
+      expect(json_response.size).to eq(1)
+      expect(json_response.first["message"]).to eq("Test Notification")
     end
   end
 
   describe "POST /notifications" do
     it "creates a new notification" do
-      post "/notifications", params: { message: "Test Notification" }
+      post "/notifications", params: { notification: { message: "Test Notification" } }
+
       expect(response).to have_http_status(:created)
-      expect(NotificationManager.instance.get_notifications.size).to eq(1)
+      json_response = JSON.parse(response.body)
+      expect(json_response["message"]).to eq("Test Notification")
     end
 
     it "returns an error if message is blank" do
-      post "/notifications", params: { message: "" }
+      post "/notifications", params: { notification: { message: "" } }
+
       expect(response).to have_http_status(:unprocessable_entity)
+      json_response = JSON.parse(response.body)
+      expect(json_response["error"]).to eq("Message can't be blank")
     end
   end
 
   describe "DELETE /notifications/:id" do
     it "deletes a specific notification" do
-      NotificationManager.instance.add_notification("Test Notification")
-      notification = NotificationManager.instance.get_notifications.first
+      notification_manager.add_notification("Test Notification")
+      notification = notification_manager.all_notifications.first
 
       delete "/notifications/#{notification[:id]}"
 
       expect(response).to have_http_status(:no_content)
-      expect(NotificationManager.instance.get_notifications).to be_empty
+      expect(notification_manager.all_notifications).to be_empty
     end
   end
 
   describe "DELETE /notifications" do
     it "clears all the notifications" do
-      NotificationManager.instance.add_notification("Clear Me")
-      NotificationManager.instance.add_notification("Clear Me Too")
-      delete "/notifications/id"
+      notification_manager.add_notification("Clear 1")
+      notification_manager.add_notification("Clear 2")
+
+      delete "/notifications"
       expect(response).to have_http_status(:no_content)
-      expect(NotificationManager.instance.get_notifications).to be_empty
+      expect(notification_manager.all_notifications).to be_empty
     end
   end
 end

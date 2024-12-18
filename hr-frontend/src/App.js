@@ -7,16 +7,24 @@ import PerformanceReviews from "./PerformanceReviews";
 import LeaveRequests from "./LeaveRequests";
 import NotificationManager from "./NotificationManager";
 import './App.css'
-
+import logo from './assets/human-resource-logo.jpg'
+import image from './images/HRdesign.jpg'
 function App(){
   return(
       <Router>
           <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
                   <div className="container">
-                      <Link className="navbar-brand" to="/">
-                          Snap HR Management System
-                      </Link>
+                      <Link className="navbar-brand d-flex align-items-center" to="/">
+                          <img
+                              src={logo}
+                              alt="Snap HR Logo"
+                              width="40"
+                              height="40"
+                              className="me-2"
+                          />
+                          <span>Snap HR Management System </span>
+                      </Link >
                       <button
                           className="navbar-toggler"
                           type="button"
@@ -66,7 +74,21 @@ function App(){
               </nav>
               <div className="container">
                   <Routes>
-                      <Route path="/" element={<h1>Welcome to Snap HR Management System</h1>}/>
+                      <Route path="/" element={
+                          <div style={{textAlign: "center", marginTop: "20px"}}>
+                          <h1>Welcome to Snap HR Management System</h1>
+                          <img
+                            src={image}
+                            alt="Image for topic"
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto",
+                                marginTop: "20px",
+                                borderRadius: "8px"
+                            }}
+                            />
+                          </div>
+                      }/>
                       <Route path="/employees" element={<Employees />} />
                       <Route path="/departments" element={<Department/>} />
                       <Route path="/attendance" element={<Attendance/>} />

@@ -1,17 +1,19 @@
+require "singleton"
 class NotificationManager
   include Singleton
 
   def initialize
     @notifications = []
-    @next_id = 1
+    @current_id = 0
   end
 
   def add_notification(message)
-    @notifications << { id: @next_id, message: message }
-    @next_id += 1
+    @current_id += 1
+    @notifications << { id: @current_id, message: message }
+    { id: @current_id, message: message }
   end
 
-  def get_notifications
+  def all_notifications
     @notifications
   end
 
@@ -19,7 +21,7 @@ class NotificationManager
     @notifications.clear
   end
 
-  def remove_notifications
+  def remove_notification(id)
     @notifications.reject! { |notification| notification[:id] == id }
   end
 end

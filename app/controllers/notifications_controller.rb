@@ -1,25 +1,31 @@
 class NotificationsController < ApplicationController
   def index
-    notifications = NotificationManager.instance.get_notifications
-    render json: notifications
+    notifications = NotificationManager.instance.all_notifications
+    render json: notifications, status: :ok
   end
 
   def create
-    message = params[:message]
-    if message.blank?
-      render json: { error: "Message can't be blank" }, status: :unprocessable_entity
+    message = params.dig(:notification, :message)
+    if message.present?
+      notification = NotificationManager.instance.add_notification(notification_params[:message])
+      render json: notification, status: :created
     else
-      NotificationManager.instance.add_notification(message)
-      render json: { message: "Message cannot be blank" }, status: :created
+      render json: { error: "Message can't be blank" }, status: :unprocessable_entity
     end
   end
   def destroy
-    notification = NotificationManager.instance.clear_notifications.find { |n| n[:id] == params[:id].to_i }
+    id = params[:id].to_i
+    NotificationManager.instance.remove_notification(id)
+    head :no_content
+  end
 
-    if notification
-      NotificationManager.instance.remove_notification(notification[:id])
-      head :no_content
-    end
-    render json: { message: "Notification not found" }, status: :no_content
+  def destroy_all
+    NotificationManager.instance.clear_notifications
+    head :no_content
+  end
+
+  private
+  def notification_params
+    params.require(:notification).permit(:message)
   end
 end
