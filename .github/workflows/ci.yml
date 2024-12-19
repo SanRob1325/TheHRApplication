@@ -59,10 +59,9 @@ jobs:
           cd hr_system
           git pull origin main
           bundle config set without 'development test'
+          git pull origin main
           yarn install
           RAILS_ENV=production bundle exec rails db:migrate
-          RAILS_ENV=production bin/rails assets:precompile
-          sudo systemctl restart hr_system
           EOF
 
 
