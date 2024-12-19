@@ -6,6 +6,7 @@ import Attendance from "./Attendance";
 import PerformanceReviews from "./PerformanceReviews";
 import LeaveRequests from "./LeaveRequests";
 import NotificationManager from "./NotificationManager";
+import About from "./About";
 import './App.css'
 import logo from './assets/human-resource-logo.jpg'
 import image from './images/HRdesign.jpg'
@@ -71,6 +72,11 @@ function App(){
                                       Notifications
                                   </Link>
                               </li>
+                              <li className="nav-item">
+                                  <Link className="nav-link" to="/about">
+                                      About
+                                  </Link>
+                              </li>
                           </ul>
                       </div>
                   </div>
@@ -98,6 +104,7 @@ function App(){
                       <Route path="/performance_reviews" element={<PerformanceReviews />} />
                       <Route path="/leave_requests" element={<LeaveRequests />} />
                       <Route path="/notifications" element={<NotificationManager />} />
+                      <Route path="/about" element={<About />} />
                   </Routes>
               </div>
           </div>
