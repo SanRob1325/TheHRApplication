@@ -46,29 +46,30 @@ jobs:
         run: |
           bin/rails db:setup
           bundle exec rspec --exclude-pattern "spec/system/**/*_spec.rb"
-      
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
 
       - name: Deploy EC2
+        env:
+          RAILS_ENV: production
         run: |
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_KEY }} << 'EOF'
-          cd ~/hr_system
-          git pull origin main
-          bundle install
-          RAILS_ENV=production bin/rails db:setup
-          RAILS_ENC=production bin/rails s -d
+          ssh -i ~/.ssh/id_rsa -o StrickHostKEYChecking=no ubuntu@$EC2_PUBLIC_KEY << EOF
+            # Update server and clone repo
+            sudo apt-get update && sudo apt-get upgrade -y
+            if [ ! -d "~hr_system" ]; then
+              git clone git@github.com:SanRob1325/TheHRApplication.git ~/hr_system
+            else
+              cd ~/hr_system && git pull origin main
+            fi
+          
+            cd ~/hr_system
+            export RAILS_ENV=production
+            bundle install --jobs 4 --retry 3
+            yarn install --frozen-lockfile || echo "No yarn dependencies"
+            bin/rails db:setup
+          
+            # Precompile assets and restart server
+            bin/rails assets:precompile
+            pkill -f pum || true
+            bin/rails server -e production -b 0.0.0.0 -p 3000 &
           EOF
       
 
