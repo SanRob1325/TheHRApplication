@@ -15,9 +15,10 @@ function About(){
                 <li>Department Management</li>
                 <li>Attendance Tracking</li>
                 <li>Performance Reviews</li>
+                <li>Leave Requests</li>
             </ul>
             <p>
-                Built with <strong>Ruby on Rails</strong> for the backend and <strong>React</strong> for the frontend,Snap HR Management System is a scalable SaaS service for management solutions
+            Built with <strong>Ruby on Rails</strong> for the backend and <strong>React</strong> for the frontend,Snap HR Management System is a scalable SaaS service for management solutions
             </p>
         </div>
     );
