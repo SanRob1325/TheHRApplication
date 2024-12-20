@@ -56,12 +56,18 @@ jobs:
           echo "${SSH_KEY}" > ssh_key.pem
           chmod 600 ssh_key.pem
           ssh -o StrictHostKeyChecking=no -i ssh_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
-          cd hr_system
-          git pull origin main
-          bundle config set without 'development test'
-          git pull origin main
-          yarn install
-          RAILS_ENV=production bundle exec rails db:migrate
+            set -e
+          
+            mkdir -p /home/${EC2_USER}/hr_system
+            cd /home/${EC2_USER}/hr_system
+          
+            git pull origin main
+          
+            RAILS_ENV=production bundle install
+            RAILS_ENV=production rails db:migrate
+          
+            pkill -f puma || true
+            RAILS_ENV=production rails s -b 0.0.0.0 -p 3000 &
           EOF
 
 
