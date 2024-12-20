@@ -37,7 +37,7 @@ function LeaveRequests(){
             setError("Failed to fetch employees")
         }
     };
-
+    // submits data if the use updates or adds data
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -68,13 +68,16 @@ function LeaveRequests(){
         setIsEditing(false)
         setShowModal(true)
     };
-
+    // opens the modal for editing an existing departments record
     const handleEditLeaveRequest = (leaveRequest) => {
         setCurrentLeave(leaveRequest);
         setIsEditing(true);
         setShowModal(true)
     };
-
+    /*
+    * Deletes a specific leave request by it's ID
+    * Triggers a refresh of the leave list after successful deletion
+    * **/
     const handleDeleteLeaveRequest = async (id) => {
         if (window.confirm("Are you sure you want to delete this leave request?")){
             try{
@@ -85,7 +88,7 @@ function LeaveRequests(){
             }
         }
     };
-
+    // clears form and resets modal visibility and error states
     const clearForm = () => {
         setCurrentLeave({});
         setShowModal(false);
@@ -186,7 +189,7 @@ function LeaveRequests(){
                                 onChange={(e) =>
                                     setCurrentLeave({...currentLeave,leave_type: e.target.value})
                                 }
-                                required
+                                required //table details
                                 >
                                 <option value="">Select Type</option>
                                 <option value="Casual">Casual</option>
