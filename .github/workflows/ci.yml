@@ -58,8 +58,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ssh_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
             set -e
           
-            mkdir -p /${EC2_USER}/hr_system
-            cd /${EC2_USER}/hr_system
+            cd /home/${EC2_USER}/hr_system
           
             git pull origin main
           
