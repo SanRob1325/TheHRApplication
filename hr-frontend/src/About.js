@@ -1,6 +1,7 @@
 import React from "react";
 import "./About.css"
-//Added bootstrap styling
+// Added bootstrap styling
+// Added the this page to have details on the application
 function About(){
     return(
         <div className="container mt-5 about-container">

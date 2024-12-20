@@ -4,12 +4,12 @@ import {Table,Button,Modal,Form,Alert,Spinner} from 'react-bootstrap'
 import "./Employee.css"
 function Employees(){
     const [employees,setEmployees] = useState([]);
-    const [departments,setDepartments] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [currentEmployee,setCurrentEmployee] = useState({});
-    const [isEditing,setIsEditing] = useState(false);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [departments,setDepartments] = useState([]); // Stores the department records
+    const [showModal, setShowModal] = useState(false);// Tracks if the modal is for editing or adding employee
+    const [currentEmployee,setCurrentEmployee] = useState({}); // Stores the current employee data being edited and added
+    const [isEditing,setIsEditing] = useState(false) //Tracks the modal for editing and adding employees
+    const [error, setError] = useState(''); // Stores any error message to display
+    const [loading, setLoading] = useState(false); //Tracks loading state for API requests
 
     useEffect(() => {
         fetchEmployees();
@@ -107,7 +107,7 @@ function Employees(){
                     </thead>
                     <tbody>
                     {employees.length > 0 ? (
-                        employees.map((emp) =>(
+                        employees.map((emp) =>( //table for storing employees
                             <tr key={emp.id}>
                                 <td>{emp.name}</td>
                                 <td>{emp.email}</td>
@@ -132,7 +132,7 @@ function Employees(){
                             </tr>
                         ))
                         ) : (
-                            <tr>
+                            <tr>  {/* If the API retreives nothing from the database*/}
                                 <td colSpan="4" className="text-center">
                                     No employees found.
                                 </td>

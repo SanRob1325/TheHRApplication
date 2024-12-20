@@ -3,10 +3,10 @@ import API from "./api";
 import {Table,Button,Modal,Form,Alert} from 'react-bootstrap'
 
 function PerformanceReviews() {
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState([]); // for newer reviews
     const [employees, setEmployees] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [currentReview, setCurrentReview] = useState({});
+    const [currentReview, setCurrentReview] = useState({}); // stores current review
     const [isEditing, setIsEditing] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false)
@@ -35,7 +35,8 @@ function PerformanceReviews() {
             setLoading(false);
         }
     };
-
+    // Deletes an performance review record by ID after user confirmation
+    // Refreshes the performance list after deletion
     const handleDelete = async (id) => {
         if(window.confirm("Are you sure you want to delete this review?")){
             try{

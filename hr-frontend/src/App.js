@@ -10,6 +10,8 @@ import About from "./About";
 import './App.css'
 import logo from './assets/human-resource-logo.jpg'
 import image from './images/HRdesign.jpg'
+
+// This page uses routing for the user to navigate between pages and operating user interactivity
 function App(){
     //Reference: https://api.reactrouter.com/v7/functions/react_router.Link.html
     //Inspiration and Reference:https://www.npmjs.com/package/react-router-dom

@@ -59,7 +59,7 @@ jobs:
             set -e
             USER=${EC2_USER:-ubuntu}
             cd /home/$USER/hr_system
-          
+            # changes to the directory of the new deployed ssh instance
             git pull origin main
           
             RAILS_ENV=production bundle install

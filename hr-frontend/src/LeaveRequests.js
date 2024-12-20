@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from "react";
 import API from "./api";
 import {Table,Button,Modal,Form,Alert,Spinner} from 'react-bootstrap'
-
+// Similar organisation as the previos pages
 function LeaveRequests(){
-    const [leaveRequests,setLeaveRequests] = useState([]);
+    const [leaveRequests,setLeaveRequests] = useState([]); // records for new leave requests
     const [employees,setEmployees] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [currentLeave,setCurrentLeave] = useState({});
     const [isEditing,setIsEditing] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [saving, setSaving] = useState(false)
+    const [saving, setSaving] = useState(false); // handling of save leave requests
 
     useEffect(() => {
         fetchLeaveRequests();
         fetchEmployees();
     }, []);
-
+    // fetches the list of leave requests
     const fetchLeaveRequests = async () => {
         try{
             setLoading(true);
@@ -55,7 +55,7 @@ function LeaveRequests(){
             setSaving(false);
         }
     };
-
+    // submits data if the use updates or adds data
     const handleAddLeaveRequest = () => {
         setCurrentLeave({
             employee_id: "",

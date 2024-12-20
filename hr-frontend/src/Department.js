@@ -3,8 +3,8 @@ import API from "./api";
 import {Table,Button,Modal,Form,Alert,Spinner} from 'react-bootstrap'
 import "./Department.css"
 function Department(){
-    const [departments,setDepartments] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [departments,setDepartments] = useState([]); // Stores department records
+    const [showModal, setShowModal] = useState(false); //
     const [currentDepartment,setCurrentDepartment] = useState({});
     const [isEditing,setIsEditing] = useState(false);
     const [error, setError] = useState('');
@@ -25,7 +25,7 @@ function Department(){
             setLoading(false);
         }
     };
-
+    // submits data if the use updates or adds data
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -41,7 +41,8 @@ function Department(){
             setError("Failed to save Department")
         }
     };
-
+    // Opens the modal for adding a new department record
+    // Initialises the current departments with default values
     const handleAddDepartment = () => {
         setCurrentDepartment({
             name: "",
@@ -51,12 +52,16 @@ function Department(){
         setShowModal(true)
     };
 
+    // opens the modal for editing an existing departments record
     const handleEditDepartment = (department) => {
         setCurrentDepartment(department);
         setIsEditing(true);
         setShowModal(true)
     };
-
+    /*
+    * Deletes a specific department by it's ID
+    * Triggers a refresh of the department list after successful deletion
+    * **/
     const handleDeleteDepartment = async (id) => {
         if (window.confirm("Are you sure you want to delete this department?")){
             try{
@@ -67,13 +72,13 @@ function Department(){
             }
         }
     };
-
+    // clears form and resets modal visibility and error states
     const clearForm = () => {
         setCurrentDepartment({});
         setShowModal(false);
         setError("");
     };
-    //uses DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
+    //uses JSX and DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
     return (
         <div className="container mt-5 departments-container">
             <h2 className="mb-4">Department Management</h2>
@@ -82,8 +87,8 @@ function Department(){
                 Add Department
             </Button>
             {loading ? (
-                <Spinner animation="border" />
-            ) :(
+                <Spinner animation="border" /> //Spinner loads as data loads
+            ) :( // table content
                 <Table striped bordered hover>
                     <thead className="table-header">
                     <tr>
@@ -125,7 +130,7 @@ function Department(){
                         </tr>
                     )}
                     </tbody>
-                </Table>
+                </Table> // submission buttons
             )}
             <Modal show={showModal} onHide={clearForm}>
                 <Modal.Header closeButton>

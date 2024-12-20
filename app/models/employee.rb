@@ -6,4 +6,6 @@ class Employee < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, format: { with: /\A[^@]+@[^@]+\z/ }
   validates :department_id, presence: true
+  # validations for the populated fields and the associations between  tables in the database
+  #  added email regex from : https://stackoverflow.com/questions/41348459/regex-in-react-email-validation
 end

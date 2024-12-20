@@ -5,7 +5,7 @@ class Attendance < ApplicationRecord
   validates :status, inclusion: { in: %w[Present Absent], message: "is not included in the list" }
   validates :employee_id, uniqueness: { scope: :date, message: "already has an attendance record for this date" }
   validate :date_cannot_be_in_the_future
-
+  # validations for the populated fields and the associations between  tables in the database
   private
 
   # ensures noo future dates can be selected

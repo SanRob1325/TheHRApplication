@@ -3,19 +3,20 @@ import API from "./api";
 import {Table,Button,Modal,Form,Alert,Spinner} from 'react-bootstrap'
 import "./Attendance.css"
 function Attendances(){
-    const [attendances,setAttendances] = useState([]);
-    const [employees,setEmployees] = useState([])
-    const [showModal, setShowModal] = useState(false);
-    const [currentAttendance,setCurrentAttendance] = useState({});
-    const [isEditing,setIsEditing] = useState(false);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-
+    // State variables for managing attendance data, employees,modal visibility,form state,errors and loading state
+    const [attendances,setAttendances] = useState([]); // Stores attendance records
+    const [employees,setEmployees] = useState([]) // Controls the visibility of the modal and records employee data
+    const [showModal, setShowModal] = useState(false); // Stores the current attendance data being edited and added
+    const [currentAttendance,setCurrentAttendance] = useState({}); // Tracks if the modal is for editing or adding attendance
+    const [isEditing,setIsEditing] = useState(false); //Tracks the modal for editing and adding attendance
+    const [error, setError] = useState(''); // Stores any error message to display
+    const [loading, setLoading] = useState(false); //Tracks loading state for API requests
+    // Lifecycle hook to fetch data when components initialise
     useEffect(() => {
         fetchAttendances();
         fetchEmployees();
     }, []);
-    //API calls to the backend
+    //API calls to the backend that updates the attendance state and handles loading and error state
     const fetchAttendances = async () => {
         try{
             setLoading(true);
@@ -27,7 +28,7 @@ function Attendances(){
             setLoading(false);
         }
     };
-
+    // Fetches employees from the backend API
     const fetchEmployees = async () => {
         try{
             const response =await API.get("/employees");
@@ -36,13 +37,15 @@ function Attendances(){
             setError("Failed to fetch employees")
         }
     };
-
+    // Handles form submission for adding or editing attendance records
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); //Prevent default for submission
         try{
             if (isEditing) {
+                // if editing, sends a PUT request
                 await  API.put(`/attendances/${currentAttendance.id}`, currentAttendance)
             } else{
+                // If adding a POST request is sent
                 await API.post("/attendances", {attendance: currentAttendance});
             }
             setShowModal(false);
@@ -52,7 +55,8 @@ function Attendances(){
             setError("Failed to save Attendance")
         }
     };
-
+    // Opens the modal for adding a new attendance record
+    // Initialises the currentAttendance with default values
     const handleAddAttendance = () => {
         setCurrentAttendance({
             employee_id: "",
@@ -62,13 +66,14 @@ function Attendances(){
         setIsEditing(false)
         setShowModal(true)
     };
-
+    // opens the modal for editing an existing attendance record
     const handleEditAttendance = (attendance) => {
         setCurrentAttendance(attendance);
         setIsEditing(true);
         setShowModal(true)
     };
-
+    // Deletes an attendance record by ID after user confirmation
+    // Refreshes the attendance list after deletion
     const handleDeleteAttendance = async (id) => {
         if (window.confirm("Are you sure you want to delete this record?")){
             try{
@@ -80,12 +85,13 @@ function Attendances(){
         }
     };
 
+    // clears form and resets modal visibility and error states
     const clearForm = () => {
         setCurrentAttendance({});
         setShowModal(false);
         setError("");
     };
-    //uses DOM manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
+    //uses DOM and JSX manipulation to call the functions to execute the REACT methods,additionally bootstrap styling added
     //Inspiration and Reference:https://www.npmjs.com/package/react-spinners
     return (
         <div className="container mt-5 attendances-container">
