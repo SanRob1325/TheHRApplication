@@ -57,8 +57,8 @@ jobs:
           chmod 600 ssh_key.pem
           ssh -o StrictHostKeyChecking=no -i ssh_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
             set -e
-          
-            cd /home/${EC2_USER}/hr_system
+            USER=${EC2_USER:-ubuntu}
+            cd /home/$USER/hr_system
           
             git pull origin main
           
