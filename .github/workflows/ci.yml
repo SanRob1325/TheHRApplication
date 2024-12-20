@@ -59,7 +59,7 @@ jobs:
             set -e
           
             mkdir -p /home/${EC2_USER}/hr_system
-            cd /home/${EC2_USER}/hr_system
+            cd /${EC2_USER}/hr_system
           
             git pull origin main
           
